@@ -1,0 +1,2 @@
+# MetodosNumericos
+Ejercicios del semestre
