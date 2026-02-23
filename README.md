@@ -31,7 +31,7 @@ Contenido
 2.5 Aplicaciones
 
 3. Métodos de solución de sistemas de ecuaciones
-4. 
+   
 3.1 Métodos iterativos
 
 Desarrollo
