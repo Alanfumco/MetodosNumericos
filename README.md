@@ -13,7 +13,7 @@ Contenido
 1.4 Software de cómputo numérico
 1.5 Métodos iterativos
 
-2. Métodos de solución de ecuaciones
+3. Métodos de solución de ecuaciones
 
 2.1 Métodos de intervalo
 2.2 Método de bisección
