@@ -7,6 +7,7 @@ La materia se ubica en la primera mitad de la trayectoria escolar, ya que brinda
 
 Contenido
 1. Introducción a los métodos numéricos
+   
 1.1 Importancia de los métodos numéricos
 1.2 Conceptos básicos: cifra significativa, precisión, exactitud, incertidumbre y sesgo
 1.3 Tipos de errores
