@@ -1,0 +1,8 @@
+def main():
+    a = 0.1 + 0.1 + 0.1
+    b = 0.3
+    epsilon = 0.00001
+    print(abs(a - b) < epsilon)
+
+if __name__ == "__main__":
+    main()
