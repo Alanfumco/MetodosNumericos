@@ -1,0 +1,12 @@
+def main():
+    segundos_por_dia = 86_400  # 24 horas * 60 min * 60 seg
+    dias = 30  # 30 días
+
+    segundos_totales = segundos_por_dia * dias
+
+    print("Segundos por día:", segundos_por_dia)
+    print("Días:", dias)
+    print("Total segundos:", segundos_totales)
+
+if __name__ == "__main__":
+    main()

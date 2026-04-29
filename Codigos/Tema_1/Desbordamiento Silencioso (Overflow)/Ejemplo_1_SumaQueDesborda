@@ -1,0 +1,12 @@
+def main():
+    a = 2_000_000_000  # 2 mil millones
+    b = 500_000_000    # 500 millones
+
+    suma = a + b
+
+    print("a =", a)
+    print("b =", b)
+    print("Suma =", suma)
+
+if __name__ == "__main__":
+    main()

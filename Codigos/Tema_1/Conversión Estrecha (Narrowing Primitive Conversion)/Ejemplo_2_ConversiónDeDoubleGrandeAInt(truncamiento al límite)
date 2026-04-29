@@ -1,0 +1,14 @@
+def main():
+    distancia_km = 5_000_000_000.0  # 5 mil millones de km
+    distancia_int = int(distancia_km)
+
+    print("Distancia real:", distancia_km, "km")
+    print("Distancia en int:", distancia_int, "km")
+
+    # Verificar si se truncó (simulando límite de int de Java)
+    INT_MAX = 2_147_483_647
+    if distancia_int > INT_MAX:
+        print("¡ADVERTENCIA! En Java este valor causaría overflow o truncamiento")
+
+if __name__ == "__main__":
+    main()
