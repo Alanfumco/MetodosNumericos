@@ -1,0 +1,8 @@
+def main():
+    saldo = 100.0
+    for i in range(1000):
+        saldo += 0.01
+    print(saldo)
+
+if __name__ == "__main__":
+    main()
