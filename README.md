@@ -7,7 +7,7 @@ La materia se ubica en la primera mitad de la trayectoria escolar, ya que brinda
 
 # Temas
 
-- [Tema 1](./Tema 1/README.md)
+- [Tema 1](./Tema1/README.md)
 - [Tema 2](./Tema2/README.md)
 - [Tema 3](./Tema3/README.md)
 - [Tema 4](./Tema4/README.md)
