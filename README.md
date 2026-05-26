@@ -5,34 +5,14 @@ Esta asignatura aporta al perfil del ingeniero la capacidad de aplicar métodos 
 Su integración se realizó con base en el análisis de técnicas que permiten formular problemas para que puedan resolverse mediante operaciones aritméticas.
 La materia se ubica en la primera mitad de la trayectoria escolar, ya que brinda soporte a otras asignaturas más vinculadas con el desempeño profesional.
 
-Contenido
-1. Introducción a los métodos numéricos
-   
-1.1 Importancia de los métodos numéricos
+# Temas
 
-1.2 Conceptos básicos: cifra significativa, precisión, exactitud, incertidumbre y sesgo
-
-1.3 Tipos de errores
-
-1.4 Software de cómputo numérico
-
-1.5 Métodos iterativos
-
-3. Métodos de solución de ecuaciones
-
-2.1 Métodos de intervalo
-
-2.2 Método de bisección
-
-2.3 Método de aproximaciones sucesivas
-
-2.4 Métodos de interpolación
-
-2.5 Aplicaciones
-
-3. Métodos de solución de sistemas de ecuaciones
-   
-3.1 Métodos iterativos
+- [Tema 1](./Tema1/README.md)
+- [Tema 2](./Tema2/README.md)
+- [Tema 3](./Tema3/README.md)
+- [Tema 4](./Tema4/README.md)
+- [Tema 5](./Tema5/README.md)
+- [Tema 6](./Tema6/README.md)
 
 Desarrollo
 
