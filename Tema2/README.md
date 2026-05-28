@@ -28,19 +28,24 @@ Es similar al método de Newton-Raphson, pero evita el uso de derivadas utilizan
 
 ## Fórmulas Utilizadas
 
-### Bisección
+### Método de Bisección
 
-x_r = \frac{a+b}{2}
+```text id="xtvg7f"
+xr = (a + b) / 2
+```
 
-### Newton-Raphson
+### Método de Newton-Raphson
 
-x_{n+1}=x_n-\frac{f(x_n)}{f'(x_n)}
+```text id="m7izp1"
+x(n+1) = xn - f(xn) / f'(xn)
+```
 
-### Secante
+### Método de la Secante
 
-x_{i+1}=x_i-\frac{f(x_i)(x_{i-1}-x_i)}{f(x_{i-1})-f(x_i)}
+```text id="1q6ocm"
+x(i+1) = xi - [ f(xi)(x(i-1) - xi) ] / [ f(x(i-1)) - f(xi) ]
+```
 
----
 
 ## Algoritmo y Pseudocódigo (Bisección)
 
