@@ -2,166 +2,213 @@
 
 ## Introducción
 
-Los métodos de solución de ecuaciones se utilizan para encontrar las raíces de funciones matemáticas, es decir, los valores de `x` donde una función toma el valor de cero.
+Los métodos numéricos para solución de ecuaciones permiten encontrar aproximaciones de las raíces de una función matemática, es decir, los valores de `x` donde la función es igual a cero.
 
-En muchos problemas de ingeniería, física y programación, las ecuaciones no lineales no pueden resolverse fácilmente de forma algebraica, por lo que es necesario utilizar métodos numéricos iterativos que permitan aproximar la solución.
+Estos métodos son ampliamente utilizados en ingeniería, programación, física y matemáticas aplicadas debido a que muchas ecuaciones no pueden resolverse de manera exacta mediante álgebra tradicional.
 
-Existen diferentes técnicas para resolver este tipo de problemas. Algunos métodos garantizan encontrar una solución dentro de un intervalo específico, mientras que otros ofrecen resultados más rápidos dependiendo de la aproximación inicial utilizada.
-
----
-
-## Métodos Principales
-
-### Método de Bisección
-
-Consiste en dividir repetidamente un intervalo en dos partes para localizar la raíz de una función.
-
-### Método de Newton-Raphson
-
-Utiliza derivadas para aproximar rápidamente la raíz de una ecuación mediante iteraciones sucesivas.
-
-### Método de la Secante
-
-Es similar al método de Newton-Raphson, pero evita el uso de derivadas utilizando dos aproximaciones iniciales.
+Los métodos iterativos realizan aproximaciones sucesivas hasta obtener un resultado suficientemente preciso según una tolerancia establecida.
 
 ---
 
-## Fórmulas Utilizadas
+# Métodos Principales
 
-### Método de Bisección
+## 1. Método de Bisección
 
-```text id="xtvg7f"
+El método de bisección divide repetidamente un intervalo en dos partes para localizar la raíz de una función.
+
+Este método garantiza convergencia siempre que exista un cambio de signo dentro del intervalo.
+
+### Fórmula
+
+```text
 xr = (a + b) / 2
 ```
 
-### Método de Newton-Raphson
-
-```text id="m7izp1"
-x(n+1) = xn - f(xn) / f'(xn)
-```
-
-### Método de la Secante
-
-```text id="1q6ocm"
-x(i+1) = xi - [ f(xi)(x(i-1) - xi) ] / [ f(x(i-1)) - f(xi) ]
-```
-
-
-## Algoritmo y Pseudocódigo (Bisección)
-
 ### Algoritmo
 
-1. Definir un intervalo inicial `[a,b]`.
-2. Verificar que exista un cambio de signo en la función.
-3. Calcular el punto medio del intervalo.
+1. Definir el intervalo inicial `[a,b]`.
+2. Verificar que exista cambio de signo.
+3. Calcular el punto medio.
 4. Evaluar la función en el punto medio.
-5. Seleccionar el nuevo subintervalo donde se encuentre la raíz.
-6. Repetir el procedimiento hasta alcanzar la tolerancia deseada.
+5. Seleccionar el nuevo intervalo.
+6. Repetir hasta cumplir la tolerancia.
 
 ### Pseudocódigo
 
-```text id="f0j2mx"
-INICIO Biseccion(f, a, b, tol)
+```text
+INICIO Biseccion(f,a,b,tol)
 
-  SI f(a) * f(b) >= 0 ENTONCES
-      RETORNAR ERROR
-  FIN SI
+ SI f(a)*f(b) >= 0 ENTONCES
+     RETORNAR ERROR
+ FIN SI
 
-  MIENTRAS (b - a)/2 > tol HACER
+ MIENTRAS (b-a)/2 > tol HACER
 
-      xr <- (a + b)/2
+     xr <- (a+b)/2
 
-      SI f(a) * f(xr) < 0 ENTONCES
-          b <- xr
-      SINO
-          a <- xr
-      FIN SI
+     SI f(a)*f(xr) < 0 ENTONCES
+         b <- xr
+     SINO
+         a <- xr
+     FIN SI
 
-  FIN MIENTRAS
+ FIN MIENTRAS
 
-  RETORNAR xr
+ RETORNAR xr
 
 FIN
 ```
 
 ---
 
-## Algoritmo y Pseudocódigo (Newton-Raphson)
+## 2. Método de Newton-Raphson
+
+El método de Newton-Raphson utiliza derivadas para obtener aproximaciones rápidas de la raíz de una ecuación.
+
+Este método suele converger más rápido que otros métodos iterativos.
+
+### Fórmula
+
+```text
+x(n+1) = xn - f(xn)/f'(xn)
+```
 
 ### Algoritmo
 
 1. Seleccionar una aproximación inicial.
 2. Evaluar la función y su derivada.
-3. Aplicar la fórmula de Newton-Raphson.
-4. Obtener una nueva aproximación.
-5. Continuar iterando hasta minimizar el error.
+3. Aplicar la fórmula iterativa.
+4. Actualizar el valor de `x`.
+5. Repetir hasta minimizar el error.
 
 ### Pseudocódigo
 
-```text id="4vqct8"
-INICIO NewtonRaphson(f, df, x0, tol)
+```text
+INICIO NewtonRaphson(f,df,x0,tol)
 
-  x <- x0
+ x <- x0
 
-  MIENTRAS |f(x)| > tol HACER
+ MIENTRAS |f(x)| > tol HACER
 
-      x <- x - f(x)/df(x)
+     x <- x - f(x)/df(x)
 
-  FIN MIENTRAS
+ FIN MIENTRAS
 
-  RETORNAR x
+ RETORNAR x
 
 FIN
 ```
 
 ---
 
-## Algoritmo y Pseudocódigo (Secante)
+## 3. Método de la Secante
+
+El método de la secante aproxima la raíz utilizando dos valores iniciales y evitando el uso directo de derivadas.
+
+Este método es más rápido que bisección en muchos casos.
+
+### Fórmula
+
+```text
+x(i+1)=xi-[f(xi)(x(i-1)-xi)]/[f(x(i-1))-f(xi)]
+```
 
 ### Algoritmo
 
-1. Elegir dos valores iniciales.
+1. Definir dos aproximaciones iniciales.
 2. Evaluar la función en ambos puntos.
-3. Calcular una nueva aproximación usando la ecuación de la secante.
+3. Calcular la nueva aproximación.
 4. Actualizar los valores anteriores.
-5. Repetir el procedimiento hasta alcanzar el error permitido.
+5. Repetir hasta alcanzar el error deseado.
 
 ### Pseudocódigo
 
-```text id="2gprk5"
-INICIO Secante(f, x0, x1, tol)
+```text
+INICIO Secante(f,x0,x1,tol)
 
-  MIENTRAS |x1 - x0| > tol HACER
+ MIENTRAS |x1-x0| > tol HACER
 
-      x2 <- x1 - ( f(x1) * (x0 - x1) ) / ( f(x0) - f(x1) )
+     x2 <- x1-(f(x1)*(x0-x1))/(f(x0)-f(x1))
 
-      x0 <- x1
-      x1 <- x2
+     x0 <- x1
+     x1 <- x2
 
-  FIN MIENTRAS
+ FIN MIENTRAS
 
-  RETORNAR x2
+ RETORNAR x2
 
 FIN
 ```
 
 ---
 
-## Aplicaciones de los Métodos
+## 4. Método de Falsa Posición
 
-Estos métodos son ampliamente utilizados en:
+El método de falsa posición combina características del método de bisección y secante para aproximar raíces dentro de un intervalo.
 
-* resolución de ecuaciones no lineales,
-* simulaciones computacionales,
-* cálculos científicos,
-* ingeniería,
-* análisis matemático,
-* y desarrollo de software.
+Utiliza interpolación lineal para obtener mejores aproximaciones.
+
+### Fórmula
+
+```text
+xr = b - [f(b)(a-b)]/[f(a)-f(b)]
+```
+
+### Algoritmo
+
+1. Definir el intervalo inicial.
+2. Verificar cambio de signo.
+3. Calcular el punto usando falsa posición.
+4. Evaluar la función.
+5. Actualizar el intervalo.
+6. Repetir hasta cumplir la tolerancia.
+
+### Pseudocódigo
+
+```text
+INICIO FalsaPosicion(f,a,b,tol)
+
+ SI f(a)*f(b) >= 0 ENTONCES
+     RETORNAR ERROR
+ FIN SI
+
+ MIENTRAS |f(xr)| > tol HACER
+
+     xr <- b-(f(b)*(a-b))/(f(a)-f(b))
+
+     SI f(a)*f(xr) < 0 ENTONCES
+         b <- xr
+     SINO
+         a <- xr
+     FIN SI
+
+ FIN MIENTRAS
+
+ RETORNAR xr
+
+FIN
+```
 
 ---
 
-## Implementaciones y Códigos
+# Aplicaciones de los Métodos
 
-Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a los archivos correspondientes desde la carpeta del tema.
+Estos métodos son utilizados en:
 
-👉 [Ver codigos del Tema 2](./Tema_2)
+* resolución de ecuaciones no lineales,
+* simulaciones matemáticas,
+* análisis científico,
+* cálculos de ingeniería,
+* programación numérica,
+* modelado computacional,
+* y desarrollo de software matemático.
+
+---
+
+# Implementaciones y Códigos
+
+Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a la carpeta correspondiente desde el siguiente enlace:
+
+```text
+Ver carpeta: Tema_2
+```
