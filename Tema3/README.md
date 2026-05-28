@@ -2,206 +2,247 @@
 
 ## Introducción
 
-Los métodos de solución de sistemas de ecuaciones permiten encontrar los valores desconocidos de varias variables al mismo tiempo. Estos procedimientos son fundamentales en áreas como ingeniería, programación, física y análisis numérico, ya que muchos problemas reales pueden representarse mediante sistemas lineales.
+Los métodos numéricos para sistemas de ecuaciones permiten resolver conjuntos de ecuaciones lineales simultáneas mediante procedimientos matemáticos iterativos y directos.
 
-Existen dos tipos principales de métodos:
+Estos métodos son fundamentales en áreas como ingeniería, física, programación y análisis computacional, ya que muchos problemas reales pueden representarse mediante matrices y sistemas lineales.
 
-* **Métodos directos**, que obtienen la solución en un número finito de pasos.
-* **Métodos iterativos**, que generan aproximaciones sucesivas hasta alcanzar una solución suficientemente precisa.
-
----
-
-## Métodos Principales
-
-### Método de Gauss-Jordan
-
-Transforma la matriz del sistema hasta obtener una matriz identidad, permitiendo encontrar directamente el valor de cada incógnita.
-
-### Método de Jacobi
-
-Calcula nuevas aproximaciones utilizando únicamente los valores de la iteración anterior.
-
-### Método de Gauss-Seidel
-
-Similar al método de Jacobi, pero aprovecha los valores recién calculados para acelerar la convergencia.
+Existen métodos directos, que obtienen la solución en un número determinado de pasos, y métodos iterativos, que aproximan la solución mediante repeticiones sucesivas.
 
 ---
 
-## Fórmulas Utilizadas
+# Métodos Principales
 
-### Método de Jacobi
+## 1. Método de Gauss-Jordan
 
-```text id="nwl7r5"
-xi(k+1) = ( bi - Σ(aij * xj(k)) ) / aii
+El método de Gauss-Jordan transforma la matriz aumentada del sistema hasta obtener una matriz identidad, permitiendo encontrar directamente los valores de las incógnitas.
+
+### Fórmula
+
+```text
+A|B → I|X
 ```
 
-### Método de Gauss-Seidel
+### Algoritmo
 
-```text id="j4v7bn"
-xi(k+1) = ( bi - Σ(aij * xj(k+1)) - Σ(aij * xj(k)) ) / aii
-```
+1. Formar la matriz aumentada.
+2. Seleccionar un pivote.
+3. Dividir la fila entre el pivote.
+4. Hacer ceros arriba y abajo del pivote.
+5. Repetir el proceso para cada fila.
+6. Obtener las soluciones.
 
----
+### Pseudocódigo
 
-# Algoritmo y Pseudocódigo (Gauss-Jordan)
+```text
+INICIO GaussJordan
 
-## Algoritmo
+ PARA i <- 1 HASTA n HACER
 
-1. Seleccionar una fila pivote.
-2. Dividir toda la fila entre el elemento diagonal para convertirlo en 1.
-3. Eliminar los demás elementos de la columna usando operaciones entre filas.
-4. Repetir el procedimiento para todas las filas.
-5. Obtener directamente las soluciones del sistema.
+     pivote <- A[i][i]
 
-## Pseudocódigo
+     DIVIDIR fila i ENTRE pivote
 
-```text id="3xzkp8"
-INICIO GaussJordan(A, b)
+     PARA j <- 1 HASTA n HACER
 
-  PARA i <- 1 HASTA n HACER
+         SI j != i ENTONCES
 
-      pivote <- A[i,i]
+             factor <- A[j][i]
 
-      PARA j <- 1 HASTA n HACER
-          A[i,j] <- A[i,j] / pivote
-      FIN PARA
+             RESTAR factor * fila i A fila j
 
-      b[i] <- b[i] / pivote
+         FIN SI
 
-      PARA k <- 1 HASTA n HACER
+     FIN PARA
 
-          SI k != i ENTONCES
+ FIN PARA
 
-              factor <- A[k,i]
-
-              PARA j <- 1 HASTA n HACER
-                  A[k,j] <- A[k,j] - factor * A[i,j]
-              FIN PARA
-
-              b[k] <- b[k] - factor * b[i]
-
-          FIN SI
-
-      FIN PARA
-
-  FIN PARA
-
-  RETORNAR b
+ MOSTRAR soluciones
 
 FIN
 ```
 
 ---
 
-# Algoritmo y Pseudocódigo (Jacobi)
+## 2. Método de Jacobi
 
-## Algoritmo
+El método de Jacobi es un método iterativo que aproxima las soluciones usando únicamente los valores de la iteración anterior.
+
+### Fórmula
+
+```text
+xi(k+1) = (bi - Σ(aij*xj(k))) / aii
+```
+
+### Algoritmo
 
 1. Definir una aproximación inicial.
-2. Calcular nuevos valores para cada variable utilizando los valores anteriores.
-3. Repetir las iteraciones hasta que el error sea menor a la tolerancia establecida.
-4. Mostrar el vector solución aproximado.
+2. Calcular nuevos valores para cada incógnita.
+3. Utilizar solamente valores anteriores.
+4. Repetir hasta cumplir la tolerancia.
 
-## Pseudocódigo
+### Pseudocódigo
 
-```text id="h6x0pw"
-INICIO Jacobi(A, b, x0, tol, max_iter)
+```text
+INICIO Jacobi
 
-  PARA k <- 1 HASTA max_iter HACER
+ LEER matriz A y vector B
 
-      PARA i <- 1 HASTA n HACER
+ DEFINIR valores iniciales
 
-          suma <- 0
+ REPETIR
 
-          PARA j <- 1 HASTA n HACER
+     PARA i <- 1 HASTA n HACER
 
-              SI i != j ENTONCES
-                  suma <- suma + A[i,j] * x0[j]
-              FIN SI
+         suma <- 0
 
-          FIN PARA
+         PARA j <- 1 HASTA n HACER
 
-          x_nuevo[i] <- ( b[i] - suma ) / A[i,i]
+             SI i != j ENTONCES
 
-      FIN PARA
+                 suma <- suma + A[i][j]*x[j]
 
-      SI norma(x_nuevo - x0) < tol ENTONCES
-          RETORNAR x_nuevo
-      FIN SI
+             FIN SI
 
-      x0 <- x_nuevo
+         FIN PARA
 
-  FIN PARA
+         xNuevo[i] <- (B[i]-suma)/A[i][i]
 
-FIN
-```
+     FIN PARA
 
----
+     x <- xNuevo
 
-# Algoritmo y Pseudocódigo (Gauss-Seidel)
+ HASTA cumplir tolerancia
 
-## Algoritmo
-
-1. Seleccionar un vector inicial.
-2. Actualizar cada variable utilizando inmediatamente los nuevos valores calculados.
-3. Repetir el proceso iterativo.
-4. Detenerse cuando el error sea suficientemente pequeño.
-
-## Pseudocódigo
-
-```text id="2i0l4d"
-INICIO GaussSeidel(A, b, x, tol, max_iter)
-
-  PARA k <- 1 HASTA max_iter HACER
-
-      error <- 0
-
-      PARA i <- 1 HASTA n HACER
-
-          suma <- 0
-
-          PARA j <- 1 HASTA n HACER
-
-              SI i != j ENTONCES
-                  suma <- suma + A[i,j] * x[j]
-              FIN SI
-
-          FIN PARA
-
-          x_nuevo <- ( b[i] - suma ) / A[i,i]
-
-          error <- error + |x_nuevo - x[i]|
-
-          x[i] <- x_nuevo
-
-      FIN PARA
-
-      SI error < tol ENTONCES
-          RETORNAR x
-      FIN SI
-
-  FIN PARA
+ MOSTRAR resultados
 
 FIN
 ```
 
 ---
 
-## Aplicaciones de los Sistemas de Ecuaciones
+## 3. Método de Gauss-Seidel
+
+El método de Gauss-Seidel mejora el método de Jacobi utilizando inmediatamente los nuevos valores calculados durante cada iteración.
+
+### Fórmula
+
+```text
+xi(k+1) = (bi - Σ(aij*xj)) / aii
+```
+
+### Algoritmo
+
+1. Definir valores iniciales.
+2. Calcular nuevas aproximaciones.
+3. Actualizar inmediatamente los resultados.
+4. Repetir hasta minimizar el error.
+
+### Pseudocódigo
+
+```text
+INICIO GaussSeidel
+
+ LEER matriz A y vector B
+
+ DEFINIR valores iniciales
+
+ REPETIR
+
+     PARA i <- 1 HASTA n HACER
+
+         suma <- 0
+
+         PARA j <- 1 HASTA n HACER
+
+             SI i != j ENTONCES
+
+                 suma <- suma + A[i][j]*x[j]
+
+             FIN SI
+
+         FIN PARA
+
+         x[i] <- (B[i]-suma)/A[i][i]
+
+     FIN PARA
+
+ HASTA cumplir tolerancia
+
+ MOSTRAR resultados
+
+FIN
+```
+
+---
+
+## 4. Método de Eliminación Gaussiana
+
+La eliminación gaussiana convierte el sistema en una matriz triangular superior para resolver posteriormente mediante sustitución hacia atrás.
+
+### Fórmula
+
+```text
+A|B → U|B
+```
+
+### Algoritmo
+
+1. Formar la matriz aumentada.
+2. Seleccionar pivotes.
+3. Hacer ceros debajo del pivote.
+4. Continuar hasta triangular la matriz.
+5. Resolver mediante sustitución hacia atrás.
+
+### Pseudocódigo
+
+```text
+INICIO EliminacionGaussiana
+
+ PARA k <- 1 HASTA n-1 HACER
+
+     PARA i <- k+1 HASTA n HACER
+
+         factor <- A[i][k] / A[k][k]
+
+         PARA j <- k HASTA n HACER
+
+             A[i][j] <- A[i][j] - factor*A[k][j]
+
+         FIN PARA
+
+         B[i] <- B[i] - factor*B[k]
+
+     FIN PARA
+
+ FIN PARA
+
+ REALIZAR sustitucion hacia atras
+
+ MOSTRAR soluciones
+
+FIN
+```
+
+---
+
+# Aplicaciones de los Métodos
 
 Estos métodos son utilizados en:
 
-* simulaciones matemáticas,
-* modelado físico,
-* circuitos eléctricos,
 * análisis estructural,
-* inteligencia artificial,
-* y programación científica.
+* simulaciones matemáticas,
+* programación científica,
+* modelado computacional,
+* ingeniería,
+* álgebra lineal,
+* y resolución de sistemas grandes de ecuaciones.
 
 ---
 
-## Implementaciones y Códigos
+# Implementaciones y Códigos
 
-Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a los archivos correspondientes desde la carpeta del tema.
+Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a la carpeta correspondiente desde el siguiente enlace:
 
-👉 [Ver codigos del Tema 3](./Tema_3)
+```text
+Ver carpeta: Tema_3
+```
