@@ -1,0 +1,49 @@
+# ============================================
+# Método de Euler
+# Ley de Enfriamiento de Newton
+# dT/dt = -0.1(T - 20)
+# ============================================
+
+# Función diferencial
+def f(T):
+    return -0.1 * (T - 20)
+
+# Datos iniciales
+t = 0
+T = 80
+
+# Tamaño de paso
+h = 0.5
+
+# Tiempo final
+tf = 1.5
+
+# Número de iteraciones
+n = int((tf - t) / h)
+
+print("===================================")
+print("   METODO DE EULER")
+print("===================================")
+
+print("\nIteracion\t t\t T\t Pendiente")
+
+# Ciclo de Euler
+for i in range(n):
+
+    # Calcular pendiente
+    pendiente = f(T)
+
+    # Mostrar datos actuales
+    print(i, "\t\t", round(t,2), "\t", round(T,4), "\t", round(pendiente,4))
+
+    # Formula de Euler
+    T = T + h * pendiente
+
+    # Actualizar tiempo
+    t = t + h
+
+# Resultado final
+print("\n===================================")
+print("Temperatura aproximada en t =", tf)
+print("T =", round(T,4), "°C")
+print("===================================")
