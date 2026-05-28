@@ -260,3 +260,5 @@ Con estos métodos es posible analizar:
 # Implementaciones y Códigos
 
 Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a la carpeta correspondiente desde el siguiente enlace:
+
+ [Ver codigos del Tema 1](./Tema_1)
