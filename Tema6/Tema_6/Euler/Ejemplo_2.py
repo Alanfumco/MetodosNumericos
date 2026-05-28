@@ -11,4 +11,4 @@ def euler(f,x0,y0,h,n):
 
         print(x,y)
 
-euler(lambda x,y:x+y,0,1,0.1,3)
+euler(lambda x,y:x-y,0,2,0.2,3)
