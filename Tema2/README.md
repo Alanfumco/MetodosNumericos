@@ -209,6 +209,4 @@ Estos métodos son utilizados en:
 
 Si deseas visualizar los programas y ejemplos utilizados en este tema, puedes acceder a la carpeta correspondiente desde el siguiente enlace:
 
-```text
-Ver carpeta: Tema_2
-```
+ [Ver codigos del Tema 2](./Tema_2)
